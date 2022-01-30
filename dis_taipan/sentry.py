@@ -43,6 +43,9 @@ class SentryScale(Scale):
 def setup(bot: Snake) -> None:
     token = os.environ.get('SENTRY_TOKEN')
     if not token:
+        token = getattr(bot, 'sentry_token', None)
+    if not token:
         logging.error('Sentry token not found, disabling sentry')
+        return
     sentry_sdk.init(token, before_send=sentry_filter)
     SentryScale(bot)
