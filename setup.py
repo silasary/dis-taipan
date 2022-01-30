@@ -3,9 +3,10 @@ from pathlib import Path
 from setuptools import find_packages
 from setuptools import setup
 
-requirements = []
-with open("requirements.txt") as f:
-    requirements = f.read().splitlines()
+requirements = [
+    'dis-snek>=5.0',
+    'sentry-sdk',
+]
 
 setup(
     name="dis-taipan",
