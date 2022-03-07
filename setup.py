@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 requirements = [
-    'dis-snek>=5.0',
+    'dis-snek>=6.0',
     'sentry-sdk',
 ]
 
@@ -15,7 +15,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Silasary",
     url="https://github.com/silasary/dis-taipan",
-    version="0.2.1",
+    version="0.2.2",
     packages=find_packages(),
     package_data={"dis_taipan": ["py.typed", "*.pyi", "**/*.pyi"]},
     
