@@ -5,7 +5,7 @@ import subprocess
 import sys
 from dis_snek import Snake, listen, Scale
 
-from dis_snek import Task, triggers
+from dis_snek.models.snek.tasks import Task, triggers
 
 class Updater(Scale):
     def __init__(self, bot: Snake) -> None:
