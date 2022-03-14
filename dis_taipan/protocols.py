@@ -1,12 +1,13 @@
 from io import IOBase
 from pathlib import Path
-from typing import Any, List, Optional, Protocol, Union
+from typing import Any, List, Optional, Protocol, Union, runtime_checkable
 
 from dis_snek import Snake
 from dis_snek.models import (TYPE_MESSAGEABLE_CHANNEL, AllowedMentions, BaseComponent, Embed, File, Member, Message,
                              MessageFlags, MessageReference, Snowflake_Type, Sticker, User)
 
 
+@runtime_checkable
 class SendableContext(Protocol):
     channel: TYPE_MESSAGEABLE_CHANNEL
     bot: Snake
