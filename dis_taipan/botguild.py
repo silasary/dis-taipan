@@ -16,7 +16,12 @@ class SelfGuild(Scale):
         return await self.bot.create_guild(self.bot.user.username)
 
     async def get_emoji(self, name: str) -> PartialEmoji:
-        for emoji in self.bot.emojis:
+        """Get an emoji by name."""
+        name = name.replace(' ', '_')
+        if self.bot.cache.emoji_cache is None:
+            self.bot.cache.emoji_cache = {}
+            await (await self.get_server()).fetch_all_custom_emojis()
+        for emoji in self.bot.cache.emoji_cache.values():
             if emoji.name == name:
                 return emoji
         path = os.path.join('emoji_images', name + '.png')
@@ -28,7 +33,7 @@ class SelfGuild(Scale):
         guild = await self.get_server()
         print(f'Uploading {name} to {guild.name}')
         with open(path, 'rb') as f:
-            return await guild.create_custom_emoji(name=name, imagefile=f.read())
+            return await guild.create_custom_emoji(name=name, imagefile=f)
 
     async def _fetch_emoji_image(self, name: str, path: str) -> None:  # noqa
         """Virtual method that can be overridden to fetch an emoji from an external source."""
