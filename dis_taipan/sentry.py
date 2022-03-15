@@ -31,8 +31,10 @@ class SentryScale(Scale):
             'name': str(self.bot.user),
             'intents': repr(self.bot.intents),
         })
+        sentry_sdk.set_tag('bot_name', str(self.bot.user))
 
-    def default_error_handler(self, source: str, error: Exception) -> None:
+    @staticmethod
+    def default_error_handler(source: str, error: Exception) -> None:
         with sentry_sdk.configure_scope() as scope:
             scope.set_tag('source', source)
             sentry_sdk.capture_exception(error)

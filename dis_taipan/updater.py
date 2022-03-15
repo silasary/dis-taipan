@@ -1,6 +1,7 @@
 """
 Automatically Checks for updates every 5 minutes and reboots the bot if there is a new version.
 """
+import asyncio
 import subprocess
 import sys
 from dis_snek import Snake, listen, Scale
@@ -30,6 +31,10 @@ class Updater(Scale):
 
     @Task.create(triggers.IntervalTrigger(minutes=5))
     async def update(self) -> None:
+        loop = asyncio.get_running_loop()
+        loop.run_in_executor(None, self.check_for_update)
+
+    def check_for_update(self):
         try:
             subprocess.check_output(['git', 'fetch']).decode()
         except subprocess.CalledProcessError:

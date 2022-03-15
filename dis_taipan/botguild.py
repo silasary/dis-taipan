@@ -17,13 +17,18 @@ class SelfGuild(Scale):
 
     async def get_emoji(self, name: str) -> PartialEmoji:
         """Get an emoji by name."""
-        name = name.replace(' ', '_')
-        if self.bot.cache.emoji_cache is None:
-            self.bot.cache.emoji_cache = {}
-            await (await self.get_server()).fetch_all_custom_emojis()
-        for emoji in self.bot.cache.emoji_cache.values():
-            if emoji.name == name:
-                return emoji
+        try:
+            name = name.replace(' ', '_')
+            if self.bot.cache.emoji_cache is None:
+                self.bot.cache.emoji_cache = {}
+                await (await self.get_server()).fetch_all_custom_emojis()
+            for emoji in self.bot.cache.emoji_cache.values():
+                if emoji.name == name:
+                    return emoji
+        except Exception as e:
+            await self.bot.on_error('botguild.get_emoji', e)
+            return None
+
         path = os.path.join('emoji_images', name + '.png')
         if not os.path.exists(path):
             await self._fetch_emoji_image(name, path)
