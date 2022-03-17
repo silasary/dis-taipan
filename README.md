@@ -1,8 +1,9 @@
 # dis-taipan  ![PyPI](https://img.shields.io/pypi/v/dis-taipan)
 
-This is basically a bunch of "application specific" common code I want to use in most of my bots, and got sick of updating multiple times when I found bugs/improvements.
+50% Sis-snek features that are either too undercooked for merging into the library proper
+50%  "application specific" common code I want to use in most of my bots, but don't fit the philosophy of dis-snek itself.
 
-Feel free to use it, or send PRs if you want to
+A taipan is a dangerous australian snake.  I thought it was mildly amusing.
 
 ```
 pip install dis-taipan
