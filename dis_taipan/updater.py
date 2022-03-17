@@ -11,15 +11,26 @@ from dis_snek import Snake, listen, Scale
 
 from dis_snek.models.snek.tasks import Task, triggers
 
+
 class Updater(Scale):
     def __init__(self, bot: Snake) -> None:
         self.bot = bot
-        self.commit_id = subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode().strip()
-        self.branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode()
+        self.commit_id = (
+            subprocess.check_output(["git", "rev-parse", "HEAD"]).decode().strip()
+        )
+        self.branch = (
+            subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+            .strip()
+            .decode()
+        )
         try:
-            upstream = subprocess.check_output(['git', 'rev-parse', f'origin/{self.branch}']).decode().strip()
+            upstream = (
+                subprocess.check_output(["git", "rev-parse", f"origin/{self.branch}"])
+                .decode()
+                .strip()
+            )
             if upstream == self.commit_id:
-                print(f'Currently running {self.commit_id} on {self.branch}')
+                print(f"Currently running {self.commit_id} on {self.branch}")
 
         except subprocess.CalledProcessError as e:
             print(e)
@@ -41,20 +52,25 @@ class Updater(Scale):
 
     def check_for_update(self) -> bool:
         try:
-            subprocess.check_output(['git', 'fetch']).decode()
+            subprocess.check_output(["git", "fetch"]).decode()
         except subprocess.CalledProcessError:
             return
-        commit_id = subprocess.check_output(['git', 'rev-parse', f'origin/{self.branch}']).decode().strip()
+        commit_id = (
+            subprocess.check_output(["git", "rev-parse", f"origin/{self.branch}"])
+            .decode()
+            .strip()
+        )
         if commit_id != self.commit_id:
-            print(f'origin/{self.branch} at {commit_id}')
-            print('Update found, shutting down')
-            subprocess.check_output(['git', 'pull']).decode()
+            print(f"origin/{self.branch} at {commit_id}")
+            print("Update found, shutting down")
+            subprocess.check_output(["git", "pull"]).decode()
             try:
-                subprocess.check_output(['pipenv', 'sync']).decode()
+                subprocess.check_output(["pipenv", "sync"]).decode()
             except Exception as c:
                 print(c)
             return True
         return False
+
 
 def setup(bot: Snake) -> None:
     Updater(bot)

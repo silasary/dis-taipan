@@ -4,8 +4,8 @@ from setuptools import find_packages
 from setuptools import setup
 
 requirements = [
-    'dis-snek>=6.0',
-    'sentry-sdk',
+    "dis-snek>=6.0",
+    "sentry-sdk",
 ]
 
 setup(
@@ -18,7 +18,6 @@ setup(
     version="0.2.6",
     packages=find_packages(),
     package_data={"dis_taipan": ["py.typed", "*.pyi", "**/*.pyi"]},
-
     python_requires=">=3.10",
     install_requires=requirements,
     classifiers=[
