@@ -10,12 +10,19 @@ from dis_snek.models import (TYPE_MESSAGEABLE_CHANNEL, AllowedMentions, BaseComp
 @runtime_checkable
 class SendableContext(Protocol):
     channel: TYPE_MESSAGEABLE_CHANNEL
-    bot: Snake
     invoked_name: str
 
     author: Union[Member, User]
     guild_id: Snowflake_Type
     message: Message
+
+    @property
+    def bot(self) -> Snake:
+        ...
+
+    @property
+    def guild(self) -> Optional["Guild"]:
+        ...
 
     async def send(
         self,
