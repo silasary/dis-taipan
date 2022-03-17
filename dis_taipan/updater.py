@@ -37,7 +37,7 @@ class Updater(Scale):
             pass
 
     @listen()
-    async def on_startup(self):
+    async def on_startup(self) -> None:
         try:
             self.update.start()
         except Exception as e:
@@ -54,7 +54,7 @@ class Updater(Scale):
         try:
             subprocess.check_output(["git", "fetch"]).decode()
         except subprocess.CalledProcessError:
-            return
+            return False
         commit_id = (
             subprocess.check_output(["git", "rev-parse", f"origin/{self.branch}"])
             .decode()
