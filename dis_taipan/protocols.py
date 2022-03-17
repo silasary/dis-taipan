@@ -1,3 +1,6 @@
+"""
+Things to make static typing easier.
+"""
 from io import IOBase
 from pathlib import Path
 from typing import Any, List, Optional, Protocol, Union, runtime_checkable
@@ -9,6 +12,9 @@ from dis_snek.models import (TYPE_MESSAGEABLE_CHANNEL, AllowedMentions, BaseComp
 
 @runtime_checkable
 class SendableContext(Protocol):
+    """
+    A protocol that supports any context that can send messages.
+    """
     channel: TYPE_MESSAGEABLE_CHANNEL
     invoked_name: str
 

@@ -1,0 +1,100 @@
+site_name: Dis-Taipan
+repo_url: https://github.com/silasary/Dis-Taipan
+repo_name: silasary/Dis-Taipan
+copyright: Copyright &copy; Silasary
+docs_dir: docs/src
+edit_uri: edit/main/docs/src
+
+theme:
+  name: material
+#   custom_dir: docs/overrides
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.top
+    - navigation.tabs
+    - search.suggest
+    - search.share
+    - navigation.indexes
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light green
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: lime
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github-alt
+    logo: material/book
+
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/dis-snek
+      name: Discord Server
+    - icon: fontawesome/brands/github
+      link: https://github.com/silasary/dis-taipan
+      name: Github Repository
+
+extra_css:
+  - extra.css
+
+plugins:
+- search
+- awesome-pages
+- autorefs
+- mkdocstrings:
+    # custom_templates: docs/templates
+    enable_inventory: true
+    handlers:
+      python:
+        selection:
+          inherited_members: false
+          filters:
+            - "!^_"
+        rendering:
+          members_order: source
+          show_bases: True
+          show_root_toc_entry: False
+          group_by_category: False
+          heading_level: 2
+          show_if_no_docstring: False # temporary, this will be reverted to False once we're done with docs
+    watch:
+      - dis_taipan
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: docs/_snippets
+      check_paths: True
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.keys
+  - pymdownx.saneheaders
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true

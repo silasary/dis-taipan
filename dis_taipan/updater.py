@@ -1,5 +1,8 @@
 """
 Automatically Checks for updates every 5 minutes and reboots the bot if there is a new version.
+
+`bot.load_extension('dis_taipan.updater')`
+
 """
 import asyncio
 import subprocess
@@ -23,7 +26,7 @@ class Updater(Scale):
             pass
 
     @listen()
-    async def on_ready(self):
+    async def on_startup(self):
         try:
             self.update.start()
         except Exception as e:

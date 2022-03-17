@@ -1,6 +1,3 @@
-"""
-
-"""
 import os
 
 from dis_snek import Snake, Guild, PartialEmoji, Scale
@@ -16,7 +13,7 @@ class SelfGuild(Scale):
         return await self.bot.create_guild(self.bot.user.username)
 
     async def get_emoji(self, name: str) -> PartialEmoji:
-        """Get an emoji by name."""
+        # Get an emoji by name.
         try:
             name = name.replace(' ', '_')
             if self.bot.cache.emoji_cache is None:

@@ -1,5 +1,9 @@
 """
 Sets up a Sentry Logger
+
+To install, either set an environment variable called SENTRY_TOKEN, or put a string in the sentry_token attribute of your bot,
+And then call `bot.load_extension('dis_taipan.sentry')`
+
 """
 from typing import Any
 import logging
