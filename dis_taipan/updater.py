@@ -47,7 +47,7 @@ class Updater(Scale):
     async def update(self) -> None:
         loop = asyncio.get_running_loop()
         reboot = loop.run_in_executor(None, self.check_for_update)
-        if reboot:
+        if reboot.result():
             await self.bot.stop()
 
     def check_for_update(self) -> bool:
