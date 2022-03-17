@@ -35,9 +35,11 @@ class Updater(Scale):
     @Task.create(triggers.IntervalTrigger(minutes=5))
     async def update(self) -> None:
         loop = asyncio.get_running_loop()
-        loop.run_in_executor(None, self.check_for_update)
+        reboot = loop.run_in_executor(None, self.check_for_update)
+        if reboot:
+            await self.bot.stop()
 
-    def check_for_update(self):
+    def check_for_update(self) -> bool:
         try:
             subprocess.check_output(['git', 'fetch']).decode()
         except subprocess.CalledProcessError:
@@ -51,7 +53,8 @@ class Updater(Scale):
                 subprocess.check_output(['pipenv', 'sync']).decode()
             except Exception as c:
                 print(c)
-            sys.exit(0)
+            return True
+        return False
 
 def setup(bot: Snake) -> None:
     Updater(bot)
