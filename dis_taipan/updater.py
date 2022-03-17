@@ -46,8 +46,9 @@ class Updater(Scale):
     @Task.create(triggers.IntervalTrigger(minutes=5))
     async def update(self) -> None:
         loop = asyncio.get_running_loop()
-        reboot = loop.run_in_executor(None, self.check_for_update)
-        if reboot.result():
+        reboot = await loop.run_in_executor(None, self.check_for_update)
+
+        if reboot:
             await self.bot.stop()
 
     def check_for_update(self) -> bool:
