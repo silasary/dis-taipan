@@ -33,7 +33,7 @@ Automatic updater.  Makes the following assumptions:
 - You have some kind of health check that will reboot the bot when it shuts down.
 
 To install, call `bot.load_extension('dis_taipan.updater')`.  It'll do its magic every five minutes.
-There is not configuration.
+There is no configuration.
 
 ## Code Quality things:
 
