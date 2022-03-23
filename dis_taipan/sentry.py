@@ -5,18 +5,18 @@ To install, either set an environment variable called SENTRY_TOKEN, or put a str
 And then call `bot.load_extension('dis_taipan.sentry')`
 
 """
-from typing import Any
+from typing import Any, Optional
 import logging
 from dis_snek import Snake, Scale, listen
 import sentry_sdk
 import os
 
 
-def sentry_filter(event: dict[str, Any], hint: dict[str, Any]):  # type: ignore
+def sentry_filter(event: dict[str, Any], hint: dict[str, Any]) -> Optional[dict[str, Any]]:
     if "log_record" in hint:
         record: logging.LogRecord = hint["log_record"]
         if "dis.snek" in record.name:
-            if "/commands/permissions: 403" in record.message:
+            if ": 403" in record.message:
                 return None
             if record.message.startswith("Ignoring exception in "):
                 return None
@@ -44,13 +44,13 @@ class SentryScale(Scale):
         sentry_sdk.set_tag("bot_name", str(self.bot.user))
 
     @staticmethod
-    def default_error_handler(source: str, error: Exception) -> None:
+    def default_error_handler(source: str, error: BaseException) -> None:
         with sentry_sdk.configure_scope() as scope:
             scope.set_tag("source", source)
             sentry_sdk.capture_exception(error)
         _default_error_handler(source, error)
 
-    Snake.default_error_handler = default_error_handler
+    setattr(Snake, 'default_error_handler', default_error_handler)  # noqa: B010
 
 
 def setup(bot: Snake) -> None:

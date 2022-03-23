@@ -22,9 +22,9 @@ jobs:
     - name: Test with mypy
       run: |
         mypy --install-types --non-interactive .
-    # - name: Test with Flake8
-    #   run: |
-    #     flake8 .
-    # - name: Test with pytest
-    #   run: |
-    #     pipenv run pytest
+    - name: Test with Flake8
+      run: |
+        flake8 .
+    - name: Test with pytest
+      run: |
+        pipenv run pytest
