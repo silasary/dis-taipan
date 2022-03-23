@@ -1,0 +1,12 @@
+[flake8]
+ignore =
+    E501, Q0,
+    ANN101,
+    S6,
+    D,
+
+inline-quotes = double
+
+per-file-ignores =
+    updater.py:S607
+    protocols.py:U100
