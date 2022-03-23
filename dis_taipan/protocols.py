@@ -24,6 +24,7 @@ from dis_snek.models import (
 
 __all__ = ['SendableContext']
 
+
 @runtime_checkable
 class SendableContext(Protocol):
     """
