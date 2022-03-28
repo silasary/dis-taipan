@@ -8,7 +8,10 @@ import asyncio
 import subprocess
 from dis_snek import Snake, listen, Scale
 
-from dis_snek.models.snek.tasks import Task, triggers
+try:
+    from dis_snek.models.snek.tasks import Task, triggers
+except ModuleNotFoundError:
+    from dis_snek.ext.tasks import Task, triggers  # type: ignore
 
 
 __all__ = ['Updater', 'setup']
