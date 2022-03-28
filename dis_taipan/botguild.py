@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 
-from dis_snek import Snake, Guild, PartialEmoji, Scale
+from dis_snek import Guild, PartialEmoji, Scale, Snake
 
 
 class SelfGuild(Scale):

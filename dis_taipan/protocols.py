@@ -6,21 +6,10 @@ from pathlib import Path
 from typing import Any, List, Optional, Protocol, Union, runtime_checkable
 
 from dis_snek import Snake
-from dis_snek.models import (
-    TYPE_MESSAGEABLE_CHANNEL,
-    AllowedMentions,
-    BaseComponent,
-    Embed,
-    File,
-    Member,
-    Message,
-    MessageFlags,
-    MessageReference,
-    Snowflake_Type,
-    Sticker,
-    User,
-    Guild,
-)
+from dis_snek.models import (TYPE_MESSAGEABLE_CHANNEL, AllowedMentions,
+                             BaseComponent, Embed, File, Guild, Member,
+                             Message, MessageFlags, MessageReference,
+                             Snowflake_Type, Sticker, User)
 
 __all__ = ['SendableContext']
 

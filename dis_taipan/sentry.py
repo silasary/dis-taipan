@@ -5,11 +5,12 @@ To install, either set an environment variable called SENTRY_TOKEN, or put a str
 And then call `bot.load_extension('dis_taipan.sentry')`
 
 """
-from typing import Any, Optional
 import logging
-from dis_snek import Snake, Scale, listen
-import sentry_sdk
 import os
+from typing import Any, Optional
+
+import sentry_sdk
+from dis_snek import Scale, Snake, listen
 
 
 def sentry_filter(event: dict[str, Any], hint: dict[str, Any]) -> Optional[dict[str, Any]]:

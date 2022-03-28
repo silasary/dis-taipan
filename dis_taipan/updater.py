@@ -6,7 +6,8 @@ Automatically Checks for updates every 5 minutes and reboots the bot if there is
 """
 import asyncio
 import subprocess
-from dis_snek import Snake, listen, Scale
+
+from dis_snek import Scale, Snake, listen
 
 try:
     from dis_snek.models.snek.tasks import Task, triggers
