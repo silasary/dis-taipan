@@ -14,7 +14,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Silasary",
     url="https://github.com/silasary/dis-taipan",
-    version="0.2.8",
+    version="0.2.9",
     packages=find_packages(exclude='tests'),
     package_data={"dis_taipan": ["py.typed", "*.pyi", "**/*.pyi"]},
     python_requires=">=3.10",
