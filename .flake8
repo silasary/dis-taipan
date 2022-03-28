@@ -9,4 +9,5 @@ inline-quotes = double
 
 per-file-ignores =
     updater.py:S607
+    updater.py:S404
     protocols.py:U100
