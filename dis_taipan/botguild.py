@@ -5,14 +5,11 @@ from dis_snek import Snake, Guild, PartialEmoji, Scale
 
 
 class SelfGuild(Scale):
-    def __init__(self, bot: Snake) -> None:
-        self.bot = bot
-
     async def get_server(self) -> Guild:
         for guild in self.bot.guilds:
             if guild.name == self.bot.user.username:
                 return guild
-        return await self.bot.create_guild(self.bot.user.username)
+        return await Guild.create(self.bot.user.username, self.bot)
 
     async def get_emoji(self, name: str) -> Optional[PartialEmoji]:
         # Get an emoji by name.
