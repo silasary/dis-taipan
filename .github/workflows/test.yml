@@ -10,10 +10,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - snek: 6.0
-            snekpip: 'dis-snek==6.0'
+          - snek: 1.8.1
+            snekpip: 'naff==1.8.0'
           - snek: latest
-            snekpip: dis-snek
+            snekpip: naff
           - snek: dev
             snekpip: 'git+https://github.com/Discord-Snake-Pit/Dis-Snek.git@dev'
 

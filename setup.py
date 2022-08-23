@@ -3,7 +3,8 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 requirements = [
-    "naff",
+    "naff>=1.8.1",
+    "sentry-sdk"
 ]
 
 setup(
