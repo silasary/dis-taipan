@@ -7,19 +7,14 @@ Automatically Checks for updates every 5 minutes and reboots the bot if there is
 import asyncio
 import subprocess
 
-from dis_snek import Scale, Snake, listen
-
-try:
-    from dis_snek.models.snek.tasks import Task, triggers
-except ModuleNotFoundError:
-    from dis_snek.ext.tasks import Task, triggers  # type: ignore
-
+from naff import Client, Extension, listen, Task
+from naff.models.naff.tasks import triggers
 
 __all__ = ['Updater', 'setup']
 
 
-class Updater(Scale):
-    def __init__(self, bot: Snake) -> None:
+class Updater(Extension):
+    def __init__(self, bot: Client) -> None:
         self.bot = bot
         self.commit_id = (
             subprocess.check_output(["git", "rev-parse", "HEAD"]).decode().strip()
@@ -79,5 +74,5 @@ class Updater(Scale):
         return False
 
 
-def setup(bot: Snake) -> None:
+def setup(bot: Client) -> None:
     Updater(bot)

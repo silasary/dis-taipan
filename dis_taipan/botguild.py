@@ -1,10 +1,10 @@
 import os
 from typing import Optional
 
-from dis_snek import Guild, PartialEmoji, Scale, Snake
+from naff import Guild, PartialEmoji, Extension, Client
 
 
-class SelfGuild(Scale):
+class SelfGuild(Extension):
     async def get_server(self) -> Guild:
         for guild in self.bot.guilds:
             if guild.name == self.bot.user.username:
@@ -41,7 +41,7 @@ class SelfGuild(Scale):
         ...
 
 
-def setup(bot: Snake) -> None:
+def setup(bot: Client) -> None:
     if not os.path.exists("emoji_images"):
         os.mkdir("emoji_images")
     SelfGuild(bot)
