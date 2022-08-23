@@ -4,13 +4,15 @@ Sets up a Sentry Logger
 To install, either set an environment variable called SENTRY_TOKEN, or put a string in the sentry_token attribute of your bot,
 And then call `bot.load_extension('dis_taipan.sentry')`
 
+This will be depreciated in favour of `naff.ext.sentry`
+
 """
 import logging
 import os
 from typing import Any, Optional
 
 import sentry_sdk
-from dis_snek import Scale, Snake, listen
+from naff import Client, Extension, listen
 
 
 def sentry_filter(event: dict[str, Any], hint: dict[str, Any]) -> Optional[dict[str, Any]]:
@@ -29,10 +31,10 @@ def sentry_filter(event: dict[str, Any], hint: dict[str, Any]) -> Optional[dict[
     return event
 
 
-_default_error_handler = Snake.default_error_handler
+_default_error_handler = Client.default_error_handler
 
 
-class SentryScale(Scale):
+class SentryScale(Extension):
     @listen()
     async def on_startup(self) -> None:
         sentry_sdk.set_context(
@@ -51,10 +53,10 @@ class SentryScale(Scale):
             sentry_sdk.capture_exception(error)
         _default_error_handler(source, error)
 
-    setattr(Snake, 'default_error_handler', default_error_handler)  # noqa: B010
+    setattr(Client, 'default_error_handler', default_error_handler)  # noqa: B010
 
 
-def setup(bot: Snake) -> None:
+def setup(bot: Client) -> None:
     token = os.environ.get("SENTRY_TOKEN")
     if not token:
         token = getattr(bot, "sentry_token", None)
